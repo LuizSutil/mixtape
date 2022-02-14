@@ -37,8 +37,9 @@ const refreshTokenHelper = async ()=> {
 
 }
 
-// cron.schedule('0 03 1 */1 *', async () => {
-  cron.schedule('* * * * *', async () => {
+console.log("Cronjob initiated") 
+cron.schedule('15 7 * * 1', async () => {
+  //cron.schedule('* * * * *', async () => {
   //Logs the date that cronjob began
   console.log(new Date())
   const database = client.db("MixDB");

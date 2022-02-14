@@ -27,8 +27,9 @@ var spotifyApi = new SpotifyWebApi({
 
 app.get('/', async (req, res) => {
 
-  var authorizeURL = spotifyApi.createAuthorizeURL(scopes, 'some-state-of-my-choice',false);
-  res.redirect(authorizeURL);
+  //var authorizeURL = spotifyApi.createAuthorizeURL(scopes, 'some-state-of-my-choice',false);
+  //res.redirect(authorizeURL);
+  res.send("reply")
 
 })
 
