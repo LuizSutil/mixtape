@@ -5,16 +5,16 @@ const cron = require('node-cron');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const uri = "mongodb+srv://admin:kNW18xUrfhKhtLm1@mixtape.qbeuh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = process.env.MONGO_URL;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var spotifyApi = new SpotifyWebApi({
-    clientId: "7c323b27e1164b42a07da44759a13995",
-    clientSecret: "64355de210924c28b6111798502dcc07",
-    redirectUri: 'http://localhost:8000/home'
-
+  clientId: process.env.SPOTIFY_ID,
+  clientSecret: process.env.SPOTIFY_SECRET,
+  redirectUri: 'http://localhost:8000/home'
 });
+
 
 
 const playlists= ["37i9dQZEVXcH6AFQukMvE2","37i9dQZEVXcN4YprUuCkfa","37i9dQZEVXcOXxPocvn8Ox",
@@ -22,7 +22,7 @@ const playlists= ["37i9dQZEVXcH6AFQukMvE2","37i9dQZEVXcN4YprUuCkfa","37i9dQZEVXc
 
 
 const refreshTokenHelper = async ()=> {
-  spotifyApi.setRefreshToken("AQC_kRBDmFBe_M2zVyx6kLaPvHtW4fvCZcTo09thzyaAax7-TMCdEiTobYdnrA02dorS6035actouKRClWLTOMuakZGA6fBt6B6F0tC9k65ylaQfu2jZYD1BXjnDFOWalUs");
+  spotifyApi.setRefreshToken(process.env.USER_REFRESH);
 
   // Gets access token to make api calls to spotify
   await spotifyApi.refreshAccessToken().then(
