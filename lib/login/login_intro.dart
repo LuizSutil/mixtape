@@ -13,20 +13,58 @@ class InitAuth extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text("Mixtape uses Spotify to get its data!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20, color: Color.fromRGBO(30, 215, 96, 1))),
-            const Text("So we need your permission to do stuff",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20, color: Color.fromRGBO(30, 215, 96, 1))),
-            const Text("Please login to your spotify to continue!",
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text("Welcome to ",
+                      style: TextStyle(
+                          fontSize: 25, color: Color.fromRGBO(30, 215, 96, 1))),
+                  Text(
+                    "Mix",
+                    style: TextStyle(
+                        fontSize: 25, color: Color.fromRGBO(0, 255, 255, 1)),
+                  ),
+                  Text("ta",
+                      style: TextStyle(
+                          fontSize: 25, color: Color.fromRGBO(255, 0, 255, 1))),
+                  Text("pe",
+                      style: TextStyle(
+                          fontSize: 25, color: Color.fromRGBO(255, 255, 0, 1)))
+                ]),
+            const Image(
+              width: 150,
+              height: 150,
+              image: AssetImage('assets/MixtapeLogo.png'),
+            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40.0)),
+                      backgroundColor: Colors.white,
+                    ),
+                    onPressed: () {
+                      // ignore: avoid_print
+                      print("login");
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 10),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            color: Color.fromRGBO(30, 215, 96, 1),
+                            fontSize: 20),
+                      ),
+                    ))),
+            const Text("Or",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20, color: Color.fromRGBO(30, 215, 96, 1))),
             Padding(
-                padding: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.only(top: 10),
                 child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -41,9 +79,9 @@ class InitAuth extends StatelessWidget {
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(
-                          left: 30, right: 30, top: 10, bottom: 10),
+                          left: 5, right: 5, top: 10, bottom: 10),
                       child: Text(
-                        'Mix with Spotify!',
+                        "Mix now!",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     )))
