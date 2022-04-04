@@ -24,8 +24,8 @@ Future<UserProfile> fetchUserData(context) async {
 
 Future<String> RegisterUserPassword(
     String pwdText, UserProfile userData) async {
-  print(pwdText);
-  print(userData.displayName);
+  // print(pwdText);
+  // print(userData.displayName);
   final Map<String, String> mixAccountInfo = {
     "name": userData.displayName,
     "email": userData.email,
@@ -42,7 +42,7 @@ Future<String> RegisterUserPassword(
   if (response.statusCode == 201) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print(response.body);
+    // print(response.body);
     return "yay";
   } else {
     // If the server did not return a 200 OK response,
@@ -148,7 +148,7 @@ class _MixTapeHomeState extends State<MixTapeHome> {
                   onPressed: () {
                     logout(context);
 
-                    print(_passwordController.text);
+                    // print(_passwordController.text);
                   },
                   child: const Text("logout")),
               // ElevatedButton(

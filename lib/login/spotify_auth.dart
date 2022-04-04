@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mixtape/home/homepage.dart';
+import 'package:mixtape/login/reg_spotify.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SpotifyAuth extends StatelessWidget {
@@ -21,8 +22,10 @@ class SpotifyAuth extends StatelessWidget {
           navigationDelegate: (request) {
             if (request.url.contains('http://localhost:8000/aboutme')) {
               Navigator.pop(context); // Close current window
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MixTapeHome()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterSpotify()));
               return NavigationDecision.prevent; // Prevent opening url
             } else {
               return NavigationDecision.navigate; // Default decision
