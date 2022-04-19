@@ -166,13 +166,21 @@ app.get("/aboutme", async (req, res) => {
         if (_x == null) {
           res.send(
             JSON.stringify({
+              found: false,
               email: data.body.email,
               display_name: data.body.display_name,
               profile_image: data.body.images[0].url,
             })
           );
         } else {
-          res.sendStatus(400);
+          res.send(
+            JSON.stringify({
+              found: true,
+              email: data.body.email,
+              display_name: data.body.display_name,
+              profile_image: data.body.images[0].url,
+            })
+          );
         }
       },
       function (err) {

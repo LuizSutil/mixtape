@@ -2,55 +2,34 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mixtape/intro_page.dart';
-import 'package:mixtape/login/login_intro.dart';
+import 'package:mixtape/login/sign_in.dart';
+import 'package:mixtape/types/user_login_data.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const storage = FlutterSecureStorage();
 
-class UserProfile {
-  final String profileImage;
-  final String displayName;
-  final String email;
-
-  UserProfile(
-      {required this.profileImage,
-      required this.displayName,
-      required this.email});
-
-  factory UserProfile.fromJson(dynamic json) {
-    return UserProfile(
-        profileImage: json['profile_image'],
-        displayName: json['display_name'],
-        email: json['email']);
-  }
-}
-
 Future<UserProfile> fetchUserData(context) async {
   final response = await http.get(Uri.parse('http://localhost:8000/aboutme'));
-
-  if (response.statusCode == 200) {
+  final responseString = jsonDecode(response.body);
+  if (responseString['found'] == false) {
     return UserProfile.fromJson(jsonDecode(response.body));
   } else {
     // this should push to login page, gonna create login page
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const InitAuth()));
+
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => SignInPage(
+                foundProfile: UserProfile.fromJson(jsonDecode(response.body)))),
+        (Route<dynamic> route) => false);
+
     // Navigator.pop(context);
 
-    return UserProfile(
-        profileImage:
-            // Fix this, on the future a valid network image must be used,
-            //so probably send a unknown user from my api endpoint,
-            // but not doing it now cause bored tho
-
-            "https://i.postimg.cc/NGPh7gC1/1-9-RCWyx908-QYPP1-W5-EAfe-g.jpg",
-        displayName: "None",
-        email: "None");
+    return UserProfile.fromJson(jsonDecode(response.body));
   }
 }
 
-Future<String> RegisterUserPassword(
+Future<String> registerUserPassword(
     String pwdText, UserProfile userData) async {
   // print(pwdText);
   // print(userData.displayName);
@@ -160,7 +139,7 @@ class _RegisterSpotifyState extends State<RegisterSpotify> {
                         onPressed: () async {
                           // logout(context);
                           final userData = await fetchUserData(context);
-                          RegisterUserPassword(
+                          registerUserPassword(
                               _passwordController.text, userData);
                         },
                         child: const Text("register")),
